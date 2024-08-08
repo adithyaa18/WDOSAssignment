@@ -34,7 +34,7 @@ nav {
 .nav_button{
     background-color:rgb(79, 121, 66);
     border:none;
-    font-color:white;
+    color:white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -52,11 +52,16 @@ nav {
     font-size: 17px;
     width: 550px;
   }
+  .search{
+    height: 35px;
+    background-color: white;
+    color: black;
+  }
     
 /*product-Body*/
 .dropbtn{
     background-color: rgb(79, 121, 66);
-    font-color:white;
+    color:black;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -362,6 +367,10 @@ button:hover {
 
 .remove-btn:hover {
     background-color: #ff1a1a;
+}
+
+#subtotal{
+  font-size: 30px;
 }
 /*Footer*/
 
