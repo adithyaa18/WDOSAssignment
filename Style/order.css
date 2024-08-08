@@ -222,8 +222,8 @@ nav {
     cursor:pointer;
   }
 
-  .dot{
-    color: white;
+  #subtotal{
+    font-size: 30px;
   }
 
   /*Footer*/
