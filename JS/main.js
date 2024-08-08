@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutTotalElement = document.getElementById('checkout-total');
     const addFavoriteButton = document.getElementById('add-favorite');
     const applyFavoriteButton = document.getElementById('apply-favorites');
+    const buyNowButton = document.getElementById('buy-now');
 
     const isCartPage = !!cartTableBody;
     const isCheckoutPage = !!checkoutTableBody;
@@ -82,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        document.getElementById('buy-now').addEventListener('click', function(event) {
+        buyNowButton.addEventListener('click', function(event) {
             if (isCartEmpty()) {
                 event.preventDefault();
-                alert('Your cart is empty!! Add Some items ');
+                alert('Your cart is empty!! Add Some items');
             } else {
                 transferCartToCheckout();
                 window.location.href = 'checkout.html';
@@ -137,6 +138,51 @@ document.addEventListener('DOMContentLoaded', function() {
         function isCartEmpty() {
             const cartItems = JSON.parse(localStorage.getItem('cartData')) || [];
             return cartItems.length === 0;
+        }
+
+        // Functionality to update final total price when items are changed
+        document.querySelectorAll('.item-quantity').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const itemElement = e.target.closest('.item');
+                const itemName = itemElement.querySelector('.item-name').textContent;
+                const priceText = itemElement.querySelector('.item-price').textContent;
+                const price = parseFloat(priceText.replace('Rs.', '').replace(',', ''));
+                const quantity = parseInt(e.target.value, 10);
+                const totalPrice = price * quantity;
+
+                let row = cartTableBody.querySelector(`[data-item="${itemName}"]`);
+
+                if (quantity > 0) {
+                    if (!row) {
+                        row = document.createElement('tr');
+                        row.setAttribute('data-item', itemName);
+                        cartTableBody.appendChild(row);
+                    }
+
+                    row.innerHTML = `
+                        <td>${itemName}</td>
+                        <td>Rs.${price.toFixed(2)}</td>
+                        <td>${quantity}</td>
+                        <td>Rs.${totalPrice.toFixed(2)}</td>
+                    `;
+                } else if (row) {
+                    row.remove();
+                }
+
+                updateFinalTotalPrice();
+            });
+        });
+
+        function updateFinalTotalPrice() {
+            const rows = document.querySelectorAll('#cartTable tbody tr');
+            let finalTotal = 0;
+
+            rows.forEach(row => {
+                const total = parseFloat(row.cells[3].textContent.replace('Rs.', '').replace(',', ''));
+                finalTotal += total;
+            });
+
+            finalTotalPriceElement.textContent = finalTotal.toFixed(2);
         }
 
         updateCart();
