@@ -106,7 +106,6 @@ nav {
   text-align: center;
   display: flex;
   justify-content: space-between; /* Space out the items */
-  align-items: right; /* Center-align items vertically */
   padding: 10px 20px; /* Add some padding */
   background-color:rgb(106, 161, 33); /* Dark background color */
   
