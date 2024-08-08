@@ -6,91 +6,83 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutTotalElement = document.getElementById('checkout-total');
     const addFavoriteButton = document.getElementById('add-favorite');
     const applyFavoriteButton = document.getElementById('apply-favorites');
-    const buyNowButton = document.getElementById('buy-now');
 
     const isCartPage = !!cartTableBody;
     const isCheckoutPage = !!checkoutTableBody;
 
     if (isCartPage) {
-        // Clear cart data on page load
-        localStorage.removeItem('cartData');
-        localStorage.removeItem('finalTotalPrice');
-
         function updateCart() {
             cartTableBody.innerHTML = '';
             let finalTotalPrice = 0;
-            let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+            let cartData = [];
 
-            cartData.forEach(item => {
-                const totalPrice = item.price * item.quantity;
-                const newRow = document.createElement('tr');
-                newRow.setAttribute('data-item', item.name);
-                newRow.innerHTML = `
-                    <td>
-                        <img src="${item.imageSrc}" alt="${item.name}" class="cart-item-image">
-                        ${item.name}
-                    </td>
-                    <td>Rs.${item.price.toFixed(2)}</td>
-                    <td><input type="number" class="quantity_input" value="${item.quantity}" min="1"></td>
-                    <td>Rs.${totalPrice.toFixed(2)}</td>
-                    <td><button class="remove-btn">Remove</button></td>
-                `;
-                cartTableBody.appendChild(newRow);
+            const updatedInputs = document.querySelectorAll('.quantity_input');
 
-                finalTotalPrice += totalPrice;
+            updatedInputs.forEach(function(input) {
+                const quantity = parseFloat(input.value);
+                if (quantity > 0) {
+                    const itemElement = input.closest('.product');
+                    const itemName = itemElement.querySelector('.name').textContent;
+                    const priceText = itemElement.querySelector('.price').textContent;
+                    const price = parseFloat(priceText.replace('Rs.', '').replace(',', ''));
+                    const totalPrice = price * quantity;
+                    const imageSrc = itemElement.querySelector('.item-image').src;
+
+                    const newRow = document.createElement('tr');
+                    newRow.setAttribute('data-item', itemName);
+                    newRow.innerHTML = `
+                        <td>
+                            <img src="${imageSrc}" alt="${itemName}" class="cart-item-image">
+                            ${itemName}
+                        </td>
+                        <td>Rs.${price.toFixed(2)}</td>
+                        <td><input type="number" class="quantity_input" value="${quantity}" min="1"></td>
+                        <td>Rs.${totalPrice.toFixed(2)}</td>
+                        <td><button class="remove-btn">Remove</button></td>
+                    `;
+                    cartTableBody.appendChild(newRow);
+
+                    finalTotalPrice += totalPrice;
+
+                    cartData.push({
+                        name: itemName,
+                        price: price,
+                        quantity: quantity,
+                        total: totalPrice,
+                        imageSrc: imageSrc
+                    });
+
+                    newRow.querySelector('.remove-btn').addEventListener('click', function() {
+                        const itemIndex = cartData.findIndex(item => item.name === itemName);
+                        if (itemIndex > -1) {
+                            cartData.splice(itemIndex, 1);
+                        }
+
+                        newRow.remove();
+                        finalTotalPrice -= totalPrice;
+                        finalTotalPriceElement.textContent = finalTotalPrice.toFixed(2);
+
+                        localStorage.setItem('cartData', JSON.stringify(cartData));
+                        localStorage.setItem('finalTotalPrice', finalTotalPrice.toFixed(2));
+                    });
+
+                    newRow.querySelector('.quantity_input').addEventListener('change', updateCart);
+                }
             });
 
             finalTotalPriceElement.textContent = finalTotalPrice.toFixed(2);
-
-            // Reattach event listeners
-            attachEventListeners();
+            localStorage.setItem('cartData', JSON.stringify(cartData));
+            localStorage.setItem('finalTotalPrice', finalTotalPrice.toFixed(2));
         }
 
-        function attachEventListeners() {
-            document.querySelectorAll('.quantity_input').forEach(input => {
-                input.addEventListener('change', function() {
-                    const row = this.closest('tr');
-                    if (row) {
-                        const itemName = row.getAttribute('data-item');
-                        const newQuantity = parseFloat(this.value);
+        const quantityInputs = document.querySelectorAll('.quantity_input');
+        quantityInputs.forEach(function(input) {
+            input.addEventListener('change', updateCart);
+        });
 
-                        if (newQuantity > 0) {
-                            let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-                            const item = cartData.find(item => item.name === itemName);
-                            if (item) {
-                                item.quantity = newQuantity;
-                                item.total = item.price * newQuantity;
-                                localStorage.setItem('cartData', JSON.stringify(cartData));
-                                updateCart();
-                            }
-                        }
-                    }
-                });
-            });
-
-            document.querySelectorAll('.remove-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const row = this.closest('tr');
-                    if (row) {
-                        const itemName = row.getAttribute('data-item');
-
-                        let cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-                        cartData = cartData.filter(item => item.name !== itemName);
-                        localStorage.setItem('cartData', JSON.stringify(cartData));
-                        updateCart();
-                    }
-                });
-            });
-        }
-
-        buyNowButton.addEventListener('click', function(event) {
-            if (isCartEmpty()) {
-                event.preventDefault();
-                alert('Your cart is empty!! Add Some items');
-            } else {
-                transferCartToCheckout();
-                window.location.href = 'checkout.html';
-            }
+        document.getElementById('buy-now').addEventListener('click', function() {
+            transferCartToCheckout();
+            window.location.href = 'checkout.html';
         });
 
         addFavoriteButton.addEventListener('click', function() {
@@ -102,8 +94,43 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFavoriteButton.addEventListener('click', function() {
             const favoriteData = JSON.parse(localStorage.getItem('favoriteData')) || [];
             if (favoriteData.length > 0) {
+                cartTableBody.innerHTML = '';
+                let finalTotalPrice = 0;
+
+                favoriteData.forEach(function(item) {
+                    const newRow = document.createElement('tr');
+                    newRow.setAttribute('data-item', item.name);
+                    newRow.innerHTML = `
+                        <td>
+                            <img src="${item.imageSrc}" alt="${item.name}" class="cart-item-image">
+                            ${item.name}
+                        </td>
+                        <td>Rs.${item.price.toFixed(2)}</td>
+                        <td><input type="number" class="quantity_input" value="${item.quantity}" min="1"></td>
+                        <td>Rs.${item.total.toFixed(2)}</td>
+                        <td><button class="remove-btn">Remove</button></td>
+                    `;
+                    cartTableBody.appendChild(newRow);
+
+                    finalTotalPrice += item.total;
+
+                    newRow.querySelector('.quantity_input').addEventListener('change', updateCart);
+
+                    newRow.querySelector('.remove-btn').addEventListener('click', function() {
+                        newRow.remove();
+                        updateCart();
+                    });
+                });
+
+                finalTotalPriceElement.textContent = finalTotalPrice.toFixed(2);
+
+                const newQuantityInputs = document.querySelectorAll('.quantity_input');
+                newQuantityInputs.forEach(function(input) {
+                    input.addEventListener('change', updateCart);
+                });
+
                 localStorage.setItem('cartData', JSON.stringify(favoriteData));
-                updateCart();
+                localStorage.setItem('finalTotalPrice', finalTotalPrice.toFixed(2));
             }
         });
 
@@ -113,89 +140,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
             rows.forEach(row => {
                 const itemName = row.getAttribute('data-item');
-                const priceCell = row.cells[1];
-                const quantityCell = row.cells[2];
-                const totalCell = row.cells[3];
+                const price = row.cells[1].textContent.replace('Rs.', '').replace(',', '');
+                const quantity = row.cells[2].querySelector('.quantity_input').value;
+                const total = row.cells[3].textContent.replace('Rs.', '').replace(',', '');
+                const imageSrc = row.querySelector('.cart-item-image').src;
 
-                if (itemName && priceCell && quantityCell && totalCell) {
-                    const price = parseFloat(priceCell.textContent.replace('Rs.', '').replace(',', ''));
-                    const quantity = parseFloat(quantityCell.querySelector('.quantity_input')?.value || 0);
-                    const total = parseFloat(totalCell.textContent.replace('Rs.', '').replace(',', ''));
-                    const imageSrc = row.querySelector('.cart-item-image')?.src || '';
-
-                    cartItems.push({ itemName, price, quantity, total, imageSrc });
-                }
+                cartItems.push({ itemName, price, quantity, total, imageSrc });
             });
 
-            const subtotal = parseFloat(finalTotalPriceElement.textContent);
-            const total = (subtotal * 1.02).toFixed(2); // Calculate total with 2% tax
+            const subtotal = finalTotalPriceElement.textContent;
+            const total = document.getElementById('total')?.textContent || subtotal;
 
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            localStorage.setItem('subtotal', subtotal.toFixed(2));
+            localStorage.setItem('subtotal', subtotal);
             localStorage.setItem('total', total);
-        }
-
-        function isCartEmpty() {
-            const cartItems = JSON.parse(localStorage.getItem('cartData')) || [];
-            return cartItems.length === 0;
-        }
-
-        // Functionality to update final total price when items are changed
-        document.querySelectorAll('.item-quantity').forEach(input => {
-            input.addEventListener('change', (e) => {
-                const itemElement = e.target.closest('.item');
-                const itemName = itemElement.querySelector('.item-name').textContent;
-                const priceText = itemElement.querySelector('.item-price').textContent;
-                const price = parseFloat(priceText.replace('Rs.', '').replace(',', ''));
-                const quantity = parseInt(e.target.value, 10);
-                const totalPrice = price * quantity;
-
-                let row = cartTableBody.querySelector(`[data-item="${itemName}"]`);
-
-                if (quantity > 0) {
-                    if (!row) {
-                        row = document.createElement('tr');
-                        row.setAttribute('data-item', itemName);
-                        cartTableBody.appendChild(row);
-                    }
-
-                    row.innerHTML = `
-                        <td>${itemName}</td>
-                        <td>Rs.${price.toFixed(2)}</td>
-                        <td>${quantity}</td>
-                        <td>Rs.${totalPrice.toFixed(2)}</td>
-                    `;
-                } else if (row) {
-                    row.remove();
-                }
-
-                updateFinalTotalPrice();
-            });
-        });
-
-        function updateFinalTotalPrice() {
-            const rows = document.querySelectorAll('#cartTable tbody tr');
-            let finalTotal = 0;
-
-            rows.forEach(row => {
-                const total = parseFloat(row.cells[3].textContent.replace('Rs.', '').replace(',', ''));
-                finalTotal += total;
-            });
-
-            finalTotalPriceElement.textContent = finalTotal.toFixed(2);
         }
 
         updateCart();
     }
 
     if (isCheckoutPage) {
+        loadCart();
+
         function loadCart() {
             const cartData = JSON.parse(localStorage.getItem('cartItems')) || [];
             const subtotal = localStorage.getItem('subtotal');
             const total = localStorage.getItem('total');
 
             if (cartData.length > 0) {
-                cartData.forEach(item => {
+                cartData.forEach(function(item) {
                     const newRow = document.createElement('tr');
                     newRow.innerHTML = `
                         <td>
@@ -214,43 +187,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        loadCart();
-
         const form = document.getElementById('checkoutForm');
         const confirmationMessage = document.getElementById('confirmationMessage');
 
         form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault();
 
-            // Calculate delivery date (e.g., adding 3 days to the current date)
             const today = new Date();
             const deliveryDate = new Date(today.setDate(today.getDate() + 3));
 
-            // Format the delivery date as "12th of July Monday in 2024"
-            const day = deliveryDate.getDate();
-            const month = deliveryDate.toLocaleString('default', { month: 'long' });
-            const weekday = deliveryDate.toLocaleString('default', { weekday: 'long' });
-            const year = deliveryDate.getFullYear();
+            const options = { weekday: 'long', month: 'long', year: 'numeric' };
+            const formattedDate = deliveryDate.toLocaleDateString('en-US', options);
 
-            const formattedDate = `${day}${getOrdinalSuffix(day)} of ${month} ${weekday} in ${year}`;
-
-            // Create a confirmation message
             confirmationMessage.innerHTML = `
                 <p>Thank you for your order! Your order will be delivered by ${formattedDate}.</p>
             `;
 
-            // Optionally, you can also reset the form here
             form.reset();
         });
-
-        function getOrdinalSuffix(day) {
-            if (day > 3 && day < 21) return 'th'; // covers 11th to 13th
-            switch (day % 10) {
-                case 1:  return "st";
-                case 2:  return "nd";
-                case 3:  return "rd";
-                default: return "th";
-            }
-        }
     }
 });
