@@ -54,11 +54,11 @@ nav {
   .search{
     height: 35px;
   }
-        
+    
 /*product button*/
 .dropbtn{
-    background-color: #f1f1f1;
-    color:black;
+    background-color: rgb(79, 121, 66);
+    color:#f1f1f1;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -220,6 +220,10 @@ nav {
     font-size: 16px;
     margin:4px 2px;
     cursor:pointer;
+  }
+
+  .dot{
+    color: white;
   }
 
   /*Footer*/
