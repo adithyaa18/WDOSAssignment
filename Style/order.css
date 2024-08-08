@@ -27,7 +27,7 @@ nav {
     justify-content: space-between; /* Space out the items */
     align-items: center; /* Center-align items vertically */
     padding: 10px 20px; /* Add some padding */
-    background-color:rgb(106, 161, 33); /* Dark background color */
+    
 }
 
 .nav_button{
@@ -233,6 +233,7 @@ footer {
   color: #fff;
   padding: 20px 0;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .footer-content {
@@ -284,7 +285,10 @@ footer {
 .links ul li a:hover {
   color: #fff;
 }
-
+.links h2{
+  background-color: rgb(133,187,101);
+  color: black;
+}
 .footer-bottom {
   text-align: center;
   padding-top: 10px;
@@ -293,9 +297,6 @@ footer {
   color: #ccc;
 }
   @media  screen and (max-width:600px) {
-    body{
-        background-color: rgb(106, 161, 33);
-    }
     nav input[type=text]{
       white-space: pre-line;
       width: 300px;
