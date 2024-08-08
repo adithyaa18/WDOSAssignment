@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Order</title>
         <link rel="stylesheet" href="Style\order.css">
         <link rel="manifest" href ="manifest.json">
@@ -40,61 +41,26 @@
     <main>
         <h1>Order NOW!</h1>
         <div class="shoping__cart__table">
-            <table cellspacing="0" width="100%" class="table">
+            <table class="table" id="cartTable">
                 <thead>
                     <tr>
                         <th class="shoping__product">Products</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="shoping__cart__item"> <img src="Images/pumpkin.png" alt=""><h5>Pumkin</h5></td>
-                        <td class="shoping__cart__price">RS750.00</td>
-                        <td class="shoping__cart__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <label for="input"></label><input type="number" value="0"></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="shoping__cart__total"> --- </td>
-                    </tr>
-                    <tr>
-                        <td class="shoping__cart__item"> <img src="Images/Anchor fresh milk.jpg" alt=""> <h5> Anchor Fresh Milk</h5></td>
-                        <td class="shoping__cart__price">RS400.00</td>
-                        <td class="shoping__cart__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="number" value="0">
-                                </div>
-                            </div>
-                        </td>
-                        <td class="shoping__cart__total"> --- </td>
-                    </tr>
-
-                    <tr>
-                        <td class="shoping__cart__item"> <img src="Images/Sunsilk black shampoo.jpg" alt=""> <h5>Sunsilk Black Shampoo</h5></td>
-                        <td class="shoping__cart__price">RS500.00</td>
-                        <td class="shoping__cart__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="number" value="0">
-                                </div>
-                            </div>
-                        </td>
-                        <td class="shoping__cart__total"> --- </td>
-                    </tr>
+                    <!-- Cart items will be inserted here -->
                 </tbody>
             </table>
-                <div class="shoping__checkout">
-                    <h5>Cart Total</h5>
-                    <ul>
-                        <li>Subtotal <span>Rs. 0.00</span></li>
-                        <li>Total <span>Rs. 0.00</span></li>
-                    </ul>
+            <div class="shoping__checkout">
+                <h5>Cart Total</h5>
+                <ul>
+                    <li>Total<span id="subtotal">0.00</span></li>
+                    
+                </ul>
                     <a href="./checkout.html" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
     </main>
@@ -108,9 +74,9 @@
                     <span><i class="fa fa-envelope"></i> freshpicks@gmail.com</span>
                 </div>
                 <div class="socials">
-                    <a href="#"><i class="fa fa-facebook"><img src="Images/facebook.png"></i></a>
-                    <a href="#"><i class="fa fa-twitter"><img src="Images/twitter icon.png"></i></a>
-                    <a href="#"><i class="fa fa-instagram"><img src="Images/insta icons.png"></i></a>
+                    <a href="#"><i class="fa fa-facebook"><img src="Images/facebook.png" alt="facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"><img src="Images/twitter icon.png" alt="twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"><img src="Images/insta icons.png" alt="insta"></i></a>
                 </div>
             </div>
             <div class="footer-section links">
