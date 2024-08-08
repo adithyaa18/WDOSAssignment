@@ -168,7 +168,7 @@ nav input[type=text] {
     display: inline-block; /* Allow for inline styling */
     padding: 10px 20px; /* Padding for the button */
     background-color: #4285f4; /* Blue background */
-    color: white; /* White text color */
+    color: black; /* White text color */
     border: none; /* No border */
     border-radius: 5px; /* Rounded corners */
     text-align: center; /* Center-align text */
