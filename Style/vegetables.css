@@ -35,7 +35,7 @@ nav {
 .nav_button{
   background-color:rgb(79, 121, 66);
   border:none;
-  color:rgb(18, 18, 18);
+  color:#defde0;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -53,11 +53,13 @@ nav input[type=text] {
   font-size: 17px;
   width: 550px;
 }
-  
+.search{
+  height: 35px;
+}
 /*product*/
 .dropbtn{
   background-color: rgb(79, 121, 66);
-  color:black;
+  color:#defde0;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -116,6 +118,11 @@ nav input[type=text] {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.venue-description img{
+  height:300px ;
+  width:300px
 }
 
 .grid-container {
