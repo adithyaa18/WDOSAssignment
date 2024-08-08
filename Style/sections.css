@@ -28,6 +28,7 @@ nav {
     justify-content: space-between; /* Space out the items */
     align-items: center; /* Center-align items vertically */
     padding: 10px 20px; /* Add some padding */
+    
 }
 
 .nav_button{
@@ -41,7 +42,7 @@ nav {
     font-size: 16px;
     margin:4px 2px;
     cursor:pointer;
-  
+    font-weight: bold;
   }
   nav input[type=text] {
     padding: 6px;
@@ -64,6 +65,7 @@ nav {
     padding: 16px;
     font-size: 16px;
     border: none;
+    font-weight: bold;
   }
   
   .dropdown{
@@ -371,6 +373,20 @@ button:hover {
 #subtotal{
   font-size: 30px;
 }
+
+/* CSS */
+/*#cart-container {
+  position: absolute;
+  top: 50px; 
+  right: 20px;
+  width: 300px; 
+  background-color: #f9f9f9;
+  border: 1px solid #ccc; 
+  padding: 10px;
+  box-shadow:
+  display: none; 
+}*/
+
 /*Footer*/
 
 footer {
