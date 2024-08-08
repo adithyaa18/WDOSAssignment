@@ -2,7 +2,7 @@ body{
     background-color: rgb(179, 225, 172);
 }
 
-header,footer{
+header{
   background-color:rgb(133,187,101);
   border-radius: 10px;
   font-color:red;
