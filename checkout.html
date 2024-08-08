@@ -63,10 +63,14 @@
                         </div>
 
                         <div class="checkout__input">
+                            <p>Address</p>
                             <label>
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" name="street_address" required>
-                                <input type="text" placeholder="Apartment, suite,(optional)" name="address_optional">
+                                <p class="sub">Apartment / House No<span>*</span></p>
+                                <input type="text" placeholder="Apartment/House No" name="street_address" class="street_address"required>
+                            </label>
+                            <label>
+                                <p class="sub">Street Name<span>*</span></p>
+                                <input type="text" placeholder="Street Name" name="address" required class="street_address">
                             </label>
                          </div>
 
@@ -85,10 +89,14 @@
                         </div>
 
                         <div class="checkout__input">
+                            <p>Phone Numbers</p>
                             <label>
-                                <p>Phone Number<span>*</span></p>
-                                <input type="text" placeholder="Phone Number 1" name="phnum1" required maxlength="10">
-                                <input type="text" placeholder="phone Number 2" name="phnum2" required maxlength="10">
+                                <p class="sub">Phone Number 01<span>*</span></p>
+                                <input type="text" placeholder="Phone Number 1" name="phnum1" required maxlength="10" class="street_address">
+                            </label>
+                            <label>
+                                <p class="sub">Phone Number 02<span>*</span></p>
+                                <input type="text" placeholder="phone Number 2" name="phnum2" required maxlength="10" class="street_address">
                             </label>
                         </div>
 
@@ -129,7 +137,7 @@
                     </tbody>
                 </table>
                 <p class="stotal">Subtotal: <span id="checkout-subtotal">0.00</span></p>
-                <p class="delivery-charge">In 2% of bill will added as your delivery charges</p>
+                <p class="delivery-charge">In 2% of bill will added as Tax</p>
                 <p class="ftotal">Total: <span id="checkout-total" class="total-amount">0.00</span></p>
                                 
                 <button type="submit" class="site-btn" id="placeOrderBtn">PLACE ORDER</button>
