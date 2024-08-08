@@ -5,7 +5,7 @@ body{
 header,footer{
   background-color:rgb(133,187,101);
   border-radius: 10px;
-  color:rgb(6, 6, 6);
+  font-color:black;
   text-align: center;
 }
 
