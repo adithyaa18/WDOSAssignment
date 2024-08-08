@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Checkout</title>
+    
+        <link rel="stylesheet" href="Style/checkout.css">
+    
+        <link rel="manifest" href ="manifest.json">
+        
+            <link rel="apple-touch-icon" sizes="180x180" href="favicon_package_v0.16 (1)/apple-touch-icon.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="favicon_package_v0.16 (1)/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="favicon_package_v0.16 (1)/favicon-16x16.png">
+            <link rel="manifest" href="/site.webmanifest">
+            <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+            <meta name="msapplication-TileColor" content="#da532c">
+            <meta name="theme-color" content="#ffffff">
+    </head>
+<body>
+    <header>
+        <img src="Images/logo copy.png" width="300"><br><br><br>
+        <nav>
+            <a href="home.html" class="about"><button class="nav_button">Home</button></a>
+            <div class="dropdown">
+                <button class="dropbtn">Products</button>
+                <div class="dropdown-content">
+                  <a href="dariy products.html">Dairy Products</a>
+                  <a href="vegetbles.html">Vegetables</a>
+                  <a href="cosmetics.html">Cosmetics</a>
+                </div>
+            </div>
+            <a href="sections.html" class="sections"><button class="nav_button">Buy Now</button></a>
+                <a href="about us.html" class="about"><button class="nav_button">About Us</button></a>
+                <a href="loyalty registration.html" class="form"><button class="nav_button">Loyalty</button></a>
+            
+                <input type="text" placeholder="Search..">
+        </nav>
+
+    </header>
+    <main>
+        <div class="place_an_order">
+            <h2>Place Your Order</h2>
+        </div>
+        <div class="containter">
+            
+            <form class="checkout__form" id="checkoutForm">
+                
+                    <h4>Billing Details</h4>
+
+                        <div class="checkout__input">
+                            <p>First Name<span>*</span></p>
+                            <input type="text" name="first_name" id="name" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>Last Name<span>*</span></p>
+                            <input type="text" name="last_name" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input type="text" placeholder="Street Address" name="street_address" required>
+                            <input type="text" placeholder="Apartment, suite,(optional)" name="address_optional">
+                         </div>
+
+                        <div class="checkout__input">
+                            <p>Town/City<span>*</span></p>
+                            <input type="text" name="city" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>State/Province<span>*</span></p>
+                            <input type="text" name="state" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>Phone Number<span>*</span></p>
+                            <input type="text" placeholder="Phone Number 1" name="phnum1" required maxlength="10">
+                            <input type="text" placeholder="phone Number 2" name="phnum2" required maxlength="10">
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>Email<span>*</span></p>
+                            <input type="email" name="email" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>Payment Method<span>*</span></p>
+                            <label class="custom-radio">
+                                <input type="radio" name="payment" value="cod">
+                                Cash on Delivery
+                                </label>
+                            <label class="custom-radio">
+                                <input type="radio" name="payment" value="card">
+                                Card Payment
+                            </label>
+                        </div>
+                
+        
+                                        
+            <div class="checkout__order">
+                <h4>Your Order</h4>
+                <table class="table" id="checkoutTable">
+                    <thead>
+                        <tr>
+                            <th class="shoping__product">Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                                
+                    </tbody>
+                </table>
+                <p class="stotal">Subtotal: <span id="checkout-subtotal">0.00</span></p>
+                <p class="delivery-charge">In 2% of bill will added as your delivery charges</p>
+                <p class="ftotal">Total: <span id="checkout-total" class="total-amount">0.00</span></p>
+                                
+                <button type="submit" class="site-btn" id="placeOrderBtn">PLACE ORDER</button>
+            </div>
+            
+            <div id="confirmationMessage" style="display: block;" class="message"></div>
+            </form>
+        </div>
+            
+        <script src="JS/main.js" defer></script>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h1>About Us</h1>
+                <p>Serving You with Excellence and Care</p>
+                <div class="contact">
+                    <span><i class="fa fa-phone"></i> +94 112 556 888</span>
+                    <span><i class="fa fa-envelope"></i> freshpicks@gmail.com</span>
+                </div>
+                <div class="socials">
+                    <a href="#"><i class="fa fa-facebook"><img src="Images/facebook.png" alt="facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"><img src="Images/twitter icon.png" alt="twitter"></i></a>
+                    <a href="#"><i class="fa fa-instagram"><img src="Images/insta icons.png" alt="instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Supermarket. Designed by Apsari Udawatte.
+        </div>
+        
+    </footer>
+    
+</body>
+</html>
