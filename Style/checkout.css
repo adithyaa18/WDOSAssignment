@@ -6,7 +6,7 @@ body {
     
 }
 
-header,footer{
+header{
     background-color:rgb(133,187,101);
     border-radius: 10px;
     color:rgb(6, 6, 6);
@@ -36,7 +36,7 @@ nav {
 .nav_button{
     background-color:rgb(79, 121, 66);
     border:none;
-    font-color:white;
+    color:#defde0;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -54,11 +54,14 @@ nav {
     font-size: 17px;
     width: 550px;
   }
+  .search{
+    height: 35px;
+  }
     
 /*product*/
 .dropbtn{
     background-color: rgb(79, 121, 66);
-    font-color:white;
+    color:#defde0;
     padding: 16px;
     font-size: 16px;
     border: none;
@@ -107,6 +110,7 @@ nav {
 	font-size: 46px;
 	color: black;
 	font-weight: 700;
+  font-weight: bold;
 }
 
 .checkout__form{
@@ -209,6 +213,18 @@ nav {
   vertical-align: middle;
 }
 
+.sub{
+  margin-left: 20px;
+  font-size: 15px;
+  color: #2b2525;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.ph1,.ph2,.street_address{
+  margin-left: 20px;
+  font-size: 15px;
+}
+
 .delivery-charge {
   font-size: 1em;          
   color: #555;             
@@ -283,6 +299,7 @@ footer {
   color: #fff;
   padding: 20px 0;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .footer-content {
