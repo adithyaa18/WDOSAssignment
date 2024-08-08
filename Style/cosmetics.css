@@ -5,7 +5,7 @@ body{
 
 }
 
-header,footer{
+header{
     background-color:rgb(133,187,101);
     border-radius: 10px;
     color:rgb(6, 6, 6);
@@ -20,7 +20,7 @@ h1{
 
 .dropbtn,.offers, .about ,.form, .home{
     
-  color:black;
+  color:#defde0;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -67,7 +67,7 @@ button{
 .nav_button{
   background-color:rgb(79, 121, 66);
   border:none;
-  color:rgb(18, 18, 18);
+  color:#defde0;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -85,6 +85,13 @@ nav input[type=text] {
   font-size: 17px;
   width: 550px;
 }
+
+.search{
+  height: 35px;
+  background-color: #ddd;
+
+}
+
 nav {
   display: block;
   justify-content: space-between; /* Space out the items */
@@ -115,14 +122,24 @@ h4{
 
 }
 
+table{
+  width: 100%;
+}
+
 td {
-    padding: 10px; /* Padding within cells */
-    text-align: center;
+  width: 23%; /* Adjust the percentage for your needs */
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 
 tr:nth-child(even) {
-    background-color: rgb(133,187,101); /* Alternating row colors */
+    background-color: rgb(249, 249, 249); /* Alternating row colors */
 }
 
 a {
@@ -144,7 +161,7 @@ a {
 
 .description {
   font-size: 0.9em;
-  color: #666;
+  color: #3d3a3a;
 }
 
 .price {
@@ -163,6 +180,7 @@ a {
   text-align: center; /* Center-align text */
   text-decoration: none; /* No underline */
   font-size: 1.1em;
+  font-weight: bold;
 }
 
 /*Footer*/
@@ -172,6 +190,7 @@ footer {
   color: #fff;
   padding: 20px 0;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .footer-content {
@@ -183,6 +202,7 @@ footer {
 .footer-section {
   flex: 1;
   padding: 0 20px;
+  color: white;
 }
 
 .footer-section.about h1 {
@@ -206,6 +226,10 @@ footer {
   opacity: 0.7;
 }
 
+.links h2{
+  background-color: rgb(133,187,101);
+  color: black;
+}
 .links ul {
   list-style-type: none;
   padding: 0;
@@ -254,7 +278,7 @@ footer {
   
   td,tr,th{
     display: block;
-    
+
   }  
 }
 
