@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-header,footer{
+header{
     background-color:rgb(133,187,101);
     border-radius: 10px;
     color:rgb(6, 6, 6);
@@ -28,7 +28,6 @@ nav {
     justify-content: space-between; /* Space out the items */
     align-items: center; /* Center-align items vertically */
     padding: 10px 20px; /* Add some padding */
-    background-color:rgb(106, 161, 33); 
 }
 
 .nav_button{
@@ -379,6 +378,7 @@ footer {
     color: #fff;
     padding: 20px 0;
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 .footer-content {
